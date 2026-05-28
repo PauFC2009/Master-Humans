@@ -28,10 +28,14 @@
   .hero-top .left{display:flex;}
   .hero-top .right{display:flex;gap:10px;}
   .circle-btn{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;border:none;cursor:pointer;}
-  .hero-logo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
-  .hero-logo .brandbox{background:#c0392b;border:3px solid #fff;border-radius:14px;padding:10px 26px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.4);}
-  .hero-logo .b1{font-weight:900;color:#fff;font-size:20px;letter-spacing:2px;line-height:1;}
-  .hero-logo .b2{font-weight:900;color:#f2c200;font-size:30px;letter-spacing:1px;line-height:1;margin-top:2px;}
+  .hero-bg{position:absolute;inset:0;background:
+      radial-gradient(circle at 20% 30%, rgba(120,70,50,.6), transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(90,50,40,.6), transparent 60%),
+      linear-gradient(135deg,#3a2a24,#241712);}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.02) 0 12px, transparent 12px 24px);}
+  .hero-logo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+  .hero-logo-img{width:auto;height:64%;max-width:80%;object-fit:contain;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.45);}
 
   /* ===== INFO ===== */
   .info{padding:18px 16px 8px;text-align:center;}
@@ -140,7 +144,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="placeholder-img" style="position:absolute;inset:0;font-size:0;background:linear-gradient(135deg,#3a2a24,#5a3d30);"></div>
+  <div class="hero-bg"></div>
   <div class="hero-top">
     <div class="left"><button class="circle-btn">&larr;</button></div>
     <div class="right">
@@ -150,10 +154,7 @@
     </div>
   </div>
   <div class="hero-logo">
-    <div class="brandbox">
-      <div class="b1">MASTER</div>
-      <div class="b2">HUMANS</div>
-    </div>
+    <img src="img/logo.jpg" alt="Master Humans" class="hero-logo-img">
   </div>
 </div>
 
@@ -251,26 +252,26 @@ const ICON = {bras:"💪",cuisse:"🦵",ailes:"🦾",nuggets:"🙂",tete:"😀",
 
 const products = {
   poulets:[
-    {n:"Bras Entier Grillé",ic:"💪",p:6.99,like:85,rev:654,d:"Le bras entier, à partager.",bogo:false},
-    {n:"1/2 Bras Grillé",ic:"💪",p:6.50,like:84,rev:497,d:"Le demi-bras.",bogo:false},
-    {n:"Cuisse Tendre & Juteuse",ic:"🦵",p:7.99,like:87,rev:933,d:"La pièce.",bogo:false},
-    {n:"Filet d'Humain Grillé",ic:"🥩",p:5.50,like:88,rev:465,d:"Filet désossé.",bogo:false},
-    {n:"Ailes Bien Épicées",ic:"🦾",p:5.99,like:85,rev:202,d:"La portion d'ailes épicées.",bogo:false},
-    {n:"Nuggets 100% Humain (x6)",ic:"🙂",p:4.99,like:91,rev:1094,d:"6 nuggets, 100% humain.",bogo:false},
+    {n:"Bras Entier Grillé",ic:"💪",img:"bras",p:6.99,like:85,rev:654,d:"Le bras entier, à partager.",bogo:false},
+    {n:"1/2 Bras Grillé",ic:"💪",img:"bras",p:6.50,like:84,rev:497,d:"Le demi-bras.",bogo:false},
+    {n:"Cuisse Tendre & Juteuse",ic:"🦵",img:"cuisse",p:7.99,like:87,rev:933,d:"La pièce.",bogo:false},
+    {n:"Filet d'Humain Grillé",ic:"🥩",img:"cuisse",p:5.50,like:88,rev:465,d:"Filet désossé.",bogo:false},
+    {n:"Ailes Bien Épicées",ic:"🦾",img:"ailes",p:5.99,like:85,rev:202,d:"La portion d'ailes épicées.",bogo:false},
+    {n:"Nuggets 100% Humain (x6)",ic:"🙂",img:"nuggets",p:4.99,like:91,rev:1094,d:"6 nuggets, 100% humain.",bogo:false},
   ],
   selection:[
-    {n:"Saucisse de Bras Caramélisée",ic:"🌭",p:2.00,like:87,rev:1220,d:"La pièce.",bogo:true},
-    {n:"Pâtes à l'Humain",ic:"🍝",p:5.00,like:89,rev:1970,d:"Pâtes penne à la crème et à l'émincé d'humain…",bogo:false},
-    {n:"Doigts Sautés",ic:"🥔",p:4.00,like:87,rev:767,d:"Phalanges sautées, croustillantes.",bogo:false},
-    {n:"3 Pilons de Bras Grillé",ic:"🦴",p:4.00,like:85,rev:933,d:"3 pilons de bras.",bogo:false},
-    {n:"Riz Thaï à l'Humain",ic:"🍚",p:5.00,like:88,rev:1717,d:"Riz basmati, morceaux de cuisse désossée…",bogo:false},
-    {n:"Donut d'Humain & Fromage",ic:"🍩",p:3.00,like:91,rev:1094,d:"À l'humain et au fromage.",bogo:false},
+    {n:"Saucisse de Bras Caramélisée",ic:"🌭",img:"bras",p:2.00,like:87,rev:1220,d:"La pièce.",bogo:true},
+    {n:"Pâtes à l'Humain",ic:"🍝",img:"cuisse",p:5.00,like:89,rev:1970,d:"Pâtes penne à la crème et à l'émincé d'humain…",bogo:false},
+    {n:"Doigts Sautés",ic:"🥔",img:"ailes",p:4.00,like:87,rev:767,d:"Phalanges sautées, croustillantes.",bogo:false},
+    {n:"3 Pilons de Bras Grillé",ic:"🦴",img:"bras",p:4.00,like:85,rev:933,d:"3 pilons de bras.",bogo:false},
+    {n:"Riz Thaï à l'Humain",ic:"🍚",img:"cuisse",p:5.00,like:88,rev:1717,d:"Riz basmati, morceaux de cuisse désossée…",bogo:false},
+    {n:"Nuggets 100% Humain (x6)",ic:"🙂",img:"nuggets",p:4.99,like:91,rev:1094,d:"6 nuggets, 100% humain.",bogo:false},
   ],
   accompagnements:[
-    {n:"Doigts Sautés",ic:"🥔",p:4.00,like:87,rev:767,d:"Phalanges croustillantes.",bogo:false},
-    {n:"Riz Thaï à l'Humain",ic:"🍚",p:5.00,like:88,rev:1717,d:"Riz basmati, morceaux désossés.",bogo:false},
-    {n:"Pâtes à l'Humain",ic:"🍝",p:5.00,like:89,rev:1970,d:"Penne à la crème et émincé.",bogo:false},
-    {n:"Donut d'Humain & Fromage",ic:"🍩",p:3.00,like:91,rev:1094,d:"À l'humain et au fromage.",bogo:false},
+    {n:"Doigts Sautés",ic:"🥔",img:"ailes",p:4.00,like:87,rev:767,d:"Phalanges croustillantes.",bogo:false},
+    {n:"Riz Thaï à l'Humain",ic:"🍚",img:"cuisse",p:5.00,like:88,rev:1717,d:"Riz basmati, morceaux désossés.",bogo:false},
+    {n:"Pâtes à l'Humain",ic:"🍝",img:"cuisse",p:5.00,like:89,rev:1970,d:"Penne à la crème et émincé.",bogo:false},
+    {n:"Nuggets 100% Humain (x6)",ic:"🙂",img:"nuggets",p:4.99,like:91,rev:1094,d:"6 nuggets, 100% humain.",bogo:false},
   ],
 };
 
@@ -299,7 +300,7 @@ function showToast(){
 function cardHTML(item){
   return `<div class="card">
     <div class="imgwrap">
-      <div class="placeholder-img">${item.ic}</div>
+      <img src="img/${item.img}.jpg" alt="${item.n}" loading="lazy">
       ${item.bogo?'<div class="badge">1 acheté(s), 1 offert(s)</div>':''}
       <button class="add" data-p="${item.p}">+</button>
     </div>
@@ -324,7 +325,7 @@ document.getElementById('bogo-zone').innerHTML = `
       <span class="badge2">1 acheté(s), 1 offert(s)</span>
     </div>
     <div class="imgwrap">
-      <div class="placeholder-img">${bogo.ic}</div>
+      <img src="img/${bogo.img}.jpg" alt="${bogo.n}" loading="lazy">
       <button class="add" data-p="${bogo.p}">+</button>
     </div>
   </div>`;
