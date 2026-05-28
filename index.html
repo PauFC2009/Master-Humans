@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Humans</title>
+<style>
+  :root{
+    --green:#06C167;
+    --green-dark:#048a48;
+    --black:#000000;
+    --grey-text:#6b6b6b;
+    --grey-line:#e8e8e8;
+    --grey-bg:#f6f6f6;
+    --red:#e2231a;
+    --promo-bg:#fbe3e0;
+    --gold:#b07d2b;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{font-family:var(--font);background:#fff;color:var(--black);max-width:480px;margin:0 auto;padding-bottom:90px;}
+  img{display:block;width:100%;}
+
+  /* ===== HERO ===== */
+  .hero{position:relative;height:230px;overflow:hidden;background:#2b2b2b;}
+  .hero-img{width:100%;height:100%;object-fit:cover;opacity:.92;}
+  .hero-top{position:absolute;top:14px;left:0;right:0;display:flex;justify-content:space-between;padding:0 16px;}
+  .hero-top .left{display:flex;}
+  .hero-top .right{display:flex;gap:10px;}
+  .circle-btn{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;border:none;cursor:pointer;}
+  .hero-logo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+  .hero-logo .brandbox{background:#c0392b;border:3px solid #fff;border-radius:14px;padding:10px 26px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+  .hero-logo .b1{font-weight:900;color:#fff;font-size:20px;letter-spacing:2px;line-height:1;}
+  .hero-logo .b2{font-weight:900;color:#f2c200;font-size:30px;letter-spacing:1px;line-height:1;margin-top:2px;}
+
+  /* ===== INFO ===== */
+  .info{padding:18px 16px 8px;text-align:center;}
+  .info h1{font-size:30px;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .meta{font-size:15px;color:#222;margin-top:8px;line-height:1.5;}
+  .meta .star{color:#000;}
+  .meta .uberone{color:var(--gold);font-weight:700;}
+  .meta-row{color:#222;margin-top:4px;font-size:15px;}
+  .meta-row .pin{color:#444;}
+  .sub{color:var(--grey-text);font-size:15px;margin-top:8px;line-height:1.5;}
+  .fideles{display:inline-block;margin-top:12px;background:#e7f6ee;color:#1a7a47;font-weight:600;font-size:15px;padding:7px 14px;border-radius:8px;}
+
+  /* ===== TABS DELIVERY ===== */
+  .modes{display:flex;justify-content:space-between;gap:10px;padding:16px;}
+  .seg{display:flex;background:var(--grey-bg);border-radius:24px;padding:4px;flex:1;}
+  .seg button{flex:1;border:none;background:none;padding:9px 4px;border-radius:20px;font-size:14px;font-weight:600;color:#444;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;}
+  .seg button.active{background:#fff;color:#000;box-shadow:0 1px 3px rgba(0,0,0,.12);}
+  .group-btn{background:var(--grey-bg);border-radius:14px;border:none;padding:10px 18px;font-size:14px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
+
+  .feebox{display:flex;border:1px solid var(--grey-line);border-radius:12px;margin:0 16px;overflow:hidden;}
+  .feebox > div{flex:1;text-align:center;padding:16px 8px;}
+  .feebox > div:first-child{border-right:1px solid var(--grey-line);}
+  .feebox .big{font-size:16px;font-weight:600;}
+  .feebox .small{font-size:14px;color:var(--grey-text);margin-top:4px;}
+
+  /* ===== PROMO ===== */
+  .promo-scroll{display:flex;gap:10px;overflow-x:auto;padding:16px;scrollbar-width:none;}
+  .promo-scroll::-webkit-scrollbar{display:none;}
+  .promo{flex:0 0 88%;background:var(--promo-bg);border-radius:12px;display:flex;align-items:center;padding:14px;gap:12px;}
+  .promo .pct{width:46px;height:46px;background:var(--red);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex-shrink:0;clip-path:polygon(0 12%,12% 12%,12% 0,88% 0,88% 12%,100% 12%,100% 88%,88% 88%,88% 100%,12% 100%,12% 88%,0 88%);}
+  .promo .ptxt{flex:1;}
+  .promo .ptxt b{font-size:16px;display:block;}
+  .promo .ptxt span{font-size:14px;color:#555;}
+  .promo .use{background:#000;color:#fff;border:none;border-radius:20px;padding:10px 18px;font-weight:600;font-size:14px;cursor:pointer;}
+
+  /* ===== SECTIONS ===== */
+  .section{padding:8px 16px 0;}
+  .section h2{font-size:24px;font-weight:800;letter-spacing:-.5px;margin:14px 0 14px;}
+  .section .desc{color:var(--grey-text);font-size:15px;margin:-8px 0 16px;}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;}
+  .card{position:relative;cursor:pointer;}
+  .card .imgwrap{position:relative;border-radius:12px;overflow:hidden;background:var(--grey-bg);aspect-ratio:1/1;}
+  .card .imgwrap img{width:100%;height:100%;object-fit:cover;}
+  .card .add{position:absolute;right:8px;bottom:8px;width:36px;height:36px;border-radius:50%;background:#fff;border:none;font-size:22px;font-weight:400;color:#000;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.25);cursor:pointer;}
+  .card .badge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:5px 8px;border-radius:6px;}
+  .card .title{font-size:17px;font-weight:600;margin-top:10px;line-height:1.25;}
+  .card .price{font-size:15px;margin-top:5px;color:#111;display:flex;align-items:center;gap:6px;}
+  .card .price .likes{color:#444;}
+  .card .cdesc{font-size:14px;color:var(--grey-text);margin-top:4px;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+
+  .divider{height:8px;background:var(--grey-bg);margin:22px 0;}
+
+  /* horizontal scroll row */
+  .hrow{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;}
+  .hrow::-webkit-scrollbar{display:none;}
+  .hrow .card{flex:0 0 46%;}
+
+  /* bogo single row */
+  .bogo{display:flex;gap:14px;align-items:flex-start;padding:4px 0 8px;}
+  .bogo .txt{flex:1;}
+  .bogo .txt .title{font-size:18px;font-weight:600;line-height:1.25;}
+  .bogo .txt .price{font-size:15px;margin-top:6px;}
+  .bogo .txt .cdesc{font-size:14px;color:var(--grey-text);margin-top:4px;}
+  .bogo .txt .badge2{display:inline-block;margin-top:8px;background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:5px 9px;border-radius:6px;}
+  .bogo .imgwrap{flex:0 0 120px;position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:var(--grey-bg);}
+  .bogo .imgwrap img{width:100%;height:100%;object-fit:cover;}
+  .bogo .add{position:absolute;right:6px;bottom:6px;width:34px;height:34px;border-radius:50%;background:#fff;border:none;font-size:20px;box-shadow:0 1px 4px rgba(0,0,0,.25);cursor:pointer;}
+
+  /* menu category chips */
+  .chips{display:flex;gap:10px;overflow-x:auto;padding:4px 0 16px;scrollbar-width:none;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{flex-shrink:0;border:none;border-radius:22px;padding:11px 18px;font-size:15px;font-weight:600;background:var(--grey-bg);color:#333;cursor:pointer;display:flex;align-items:center;gap:6px;}
+  .chip.active{background:#000;color:#fff;}
+
+  /* sticky category bar */
+  .catbar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--grey-line);display:flex;align-items:center;padding:0 8px;}
+  .catbar .menu-ico{padding:14px 10px;font-size:18px;}
+  .catbar .tabs{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;flex:1;}
+  .catbar .tabs::-webkit-scrollbar{display:none;}
+  .catbar .tabs button{border:none;background:none;padding:16px 2px;font-size:16px;font-weight:600;color:var(--grey-text);white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent;}
+  .catbar .tabs button.active{color:#000;border-bottom-color:#000;}
+
+  /* uber one banner */
+  .uberbanner{display:flex;gap:12px;align-items:flex-start;padding:18px 16px;border-top:1px solid var(--grey-line);}
+  .uberbanner .chk{width:26px;height:26px;border:2px solid #bbb;border-radius:7px;flex-shrink:0;margin-top:2px;}
+  .uberbanner p{font-size:17px;line-height:1.45;color:#111;}
+  .uberbanner p b{color:var(--gold);}
+
+  /* footer note */
+  .disclaimer{padding:24px 16px 40px;text-align:center;color:#9a9a9a;font-size:12px;line-height:1.5;}
+
+  /* bottom bar */
+  .bottombar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--grey-line);padding:12px 16px;display:flex;gap:12px;}
+  .bottombar .cartbtn{flex:1;background:var(--black);color:#fff;border:none;border-radius:26px;padding:15px;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;}
+  .bottombar .cartbtn .count{background:#fff;color:#000;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:13px;}
+
+  /* toast */
+  .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:#000;color:#fff;padding:12px 20px;border-radius:24px;font-size:14px;font-weight:600;opacity:0;transition:.3s;z-index:100;pointer-events:none;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  .placeholder-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:54px;background:linear-gradient(135deg,#f3ede4,#e8dccb);}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="placeholder-img" style="position:absolute;inset:0;font-size:0;background:linear-gradient(135deg,#3a2a24,#5a3d30);"></div>
+  <div class="hero-top">
+    <div class="left"><button class="circle-btn">&larr;</button></div>
+    <div class="right">
+      <button class="circle-btn">&#128269;</button>
+      <button class="circle-btn">&#9825;</button>
+      <button class="circle-btn">&#8230;</button>
+    </div>
+  </div>
+  <div class="hero-logo">
+    <div class="brandbox">
+      <div class="b1">MASTER</div>
+      <div class="b2">HUMANS</div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO -->
+<div class="info">
+  <h1>Master <span>&#129489;</span> Humans</h1>
+  <div class="meta"><span class="star">4,2 &#9733;</span> (310+) &middot; Frais de livraison : 4,49 &euro; &middot; <span class="uberone">&#9312; Uber One</span></div>
+  <div class="meta-row"><span class="pin">&#128205;</span> 9 Rue De La Boucherie &middot; 2,6 km</div>
+  <div class="sub">&#128179; Paiement par Pluxee accepté<br>Appuyez pour consulter les horaires, les informations, etc.</div>
+  <div class="fideles">1000+ clients fidèles</div>
+</div>
+
+<!-- MODES -->
+<div class="modes">
+  <div class="seg">
+    <button class="active">&#128230;<br>Livraison</button>
+    <button>&#127939;<br>À emporter</button>
+  </div>
+  <button class="group-btn">&#128101;<br>Groupe</button>
+</div>
+
+<div class="feebox">
+  <div><div class="big">Frais de livraison : 4,49 €</div><div class="small">Autres frais &#9432;</div></div>
+  <div><div class="big">14 min</div><div class="small">Au plus tôt &#9432;</div></div>
+</div>
+
+<!-- PROMO -->
+<div class="promo-scroll">
+  <div class="promo">
+    <div class="pct">%</div>
+    <div class="ptxt"><b>-25% sur les …</b><span>Jusqu'à 18 € &#9432;</span></div>
+    <button class="use">Utiliser</button>
+  </div>
+  <div class="promo">
+    <div class="pct">%</div>
+    <div class="ptxt"><b>Offre du jour</b><span>Sur sélection &#9432;</span></div>
+    <button class="use">Utiliser</button>
+  </div>
+</div>
+
+<!-- SELECTION -->
+<div class="section">
+  <h2>Notre sélection pour vous</h2>
+  <div class="grid" id="selection-grid"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BOGO -->
+<div class="section">
+  <h2>1 acheté(s), 1 offert(s)</h2>
+  <div id="bogo-zone"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STICKY CATBAR -->
+<div class="catbar" id="catbar">
+  <div class="menu-ico">&#9776;</div>
+  <div class="tabs" id="cattabs"></div>
+</div>
+
+<!-- BROWSE MENU -->
+<div class="section">
+  <h2>Parcourez le menu</h2>
+  <div class="chips" id="chips"></div>
+  <div id="menu-zone"></div>
+</div>
+
+<!-- UBER ONE BANNER -->
+<div class="uberbanner">
+  <div class="chk"></div>
+  <p>Profitez de <b>Frais de livraison à 0 €</b> et de jusqu'à -50 % sur les frais de service avec 3 mois d'abonnement Uber One offerts</p>
+</div>
+
+<div class="disclaimer">
+  *Aucun humain n'a été maltraité avant d'être bien traité.<br>
+  Master Humans — C'est bon d'être traité comme un produit.
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottombar">
+  <button class="cartbtn" id="cartbtn">
+    <span class="count" id="cart-count">0</span>
+    <span>Voir le panier</span>
+    <span id="cart-total">0,00 €</span>
+  </button>
+</div>
+
+<div class="toast" id="toast">Ajouté au panier</div>
+
+<script>
+// ===== DATA =====
+const ICON = {bras:"💪",cuisse:"🦵",ailes:"🦾",nuggets:"🙂",tete:"😀",saucisse:"🌭",cote:"🫁"};
+
+const products = {
+  poulets:[
+    {n:"Bras Entier Grillé",ic:"💪",p:6.99,like:85,rev:654,d:"Le bras entier, à partager.",bogo:false},
+    {n:"1/2 Bras Grillé",ic:"💪",p:6.50,like:84,rev:497,d:"Le demi-bras.",bogo:false},
+    {n:"Cuisse Tendre & Juteuse",ic:"🦵",p:7.99,like:87,rev:933,d:"La pièce.",bogo:false},
+    {n:"Filet d'Humain Grillé",ic:"🥩",p:5.50,like:88,rev:465,d:"Filet désossé.",bogo:false},
+    {n:"Ailes Bien Épicées",ic:"🦾",p:5.99,like:85,rev:202,d:"La portion d'ailes épicées.",bogo:false},
+    {n:"Nuggets 100% Humain (x6)",ic:"🙂",p:4.99,like:91,rev:1094,d:"6 nuggets, 100% humain.",bogo:false},
+  ],
+  selection:[
+    {n:"Saucisse de Bras Caramélisée",ic:"🌭",p:2.00,like:87,rev:1220,d:"La pièce.",bogo:true},
+    {n:"Pâtes à l'Humain",ic:"🍝",p:5.00,like:89,rev:1970,d:"Pâtes penne à la crème et à l'émincé d'humain…",bogo:false},
+    {n:"Doigts Sautés",ic:"🥔",p:4.00,like:87,rev:767,d:"Phalanges sautées, croustillantes.",bogo:false},
+    {n:"3 Pilons de Bras Grillé",ic:"🦴",p:4.00,like:85,rev:933,d:"3 pilons de bras.",bogo:false},
+    {n:"Riz Thaï à l'Humain",ic:"🍚",p:5.00,like:88,rev:1717,d:"Riz basmati, morceaux de cuisse désossée…",bogo:false},
+    {n:"Donut d'Humain & Fromage",ic:"🍩",p:3.00,like:91,rev:1094,d:"À l'humain et au fromage.",bogo:false},
+  ],
+  accompagnements:[
+    {n:"Doigts Sautés",ic:"🥔",p:4.00,like:87,rev:767,d:"Phalanges croustillantes.",bogo:false},
+    {n:"Riz Thaï à l'Humain",ic:"🍚",p:5.00,like:88,rev:1717,d:"Riz basmati, morceaux désossés.",bogo:false},
+    {n:"Pâtes à l'Humain",ic:"🍝",p:5.00,like:89,rev:1970,d:"Penne à la crème et émincé.",bogo:false},
+    {n:"Donut d'Humain & Fromage",ic:"🍩",p:3.00,like:91,rev:1094,d:"À l'humain et au fromage.",bogo:false},
+  ],
+};
+
+const CATS = [
+  {key:"poulets",label:"Les Humains 🧍"},
+  {key:"accompagnements",label:"Les Accompagnements 🍚"},
+];
+
+// ===== STATE =====
+let cart = {count:0,total:0};
+
+function fmt(x){return x.toFixed(2).replace('.',',')+" €";}
+
+function addToCart(price){
+  cart.count++;cart.total+=price;
+  document.getElementById('cart-count').textContent=cart.count;
+  document.getElementById('cart-total').textContent=fmt(cart.total);
+  showToast();
+}
+let toastTimer;
+function showToast(){
+  const t=document.getElementById('toast');t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1400);
+}
+
+function cardHTML(item){
+  return `<div class="card">
+    <div class="imgwrap">
+      <div class="placeholder-img">${item.ic}</div>
+      ${item.bogo?'<div class="badge">1 acheté(s), 1 offert(s)</div>':''}
+      <button class="add" data-p="${item.p}">+</button>
+    </div>
+    <div class="title">${item.n}</div>
+    <div class="price">${fmt(item.p)} <span class="likes">&#128077; ${item.like}% (${item.rev})</span></div>
+    <div class="cdesc">${item.d}</div>
+  </div>`;
+}
+
+// selection grid
+document.getElementById('selection-grid').innerHTML =
+  products.selection.map(cardHTML).join('');
+
+// bogo
+const bogo = products.selection.find(x=>x.bogo);
+document.getElementById('bogo-zone').innerHTML = `
+  <div class="bogo">
+    <div class="txt">
+      <div class="title">${bogo.n}</div>
+      <div class="price">${fmt(bogo.p)} <span class="likes">&#128077; ${bogo.like}% (${bogo.rev})</span></div>
+      <div class="cdesc">La pièce.</div>
+      <span class="badge2">1 acheté(s), 1 offert(s)</span>
+    </div>
+    <div class="imgwrap">
+      <div class="placeholder-img">${bogo.ic}</div>
+      <button class="add" data-p="${bogo.p}">+</button>
+    </div>
+  </div>`;
+
+// sticky tabs
+document.getElementById('cattabs').innerHTML =
+  CATS.map((c,i)=>`<button class="${i===0?'active':''}" data-cat="${c.key}">${c.label}</button>`).join('');
+
+// chips
+document.getElementById('chips').innerHTML =
+  `<button class="chip active">&#11088; À la une</button>
+   <button class="chip">&#127807; Végétarien</button>
+   <button class="chip">&#128031; Pescétarien</button>`;
+
+// menu zone (all categories)
+function renderMenu(){
+  let html='';
+  CATS.forEach(c=>{
+    html+=`<h2 id="cat-${c.key}" style="margin-top:18px;">${c.label}</h2>`;
+    if(c.key==='poulets')html+=`<div class="desc">Nos délicieux humains grillés.</div>`;
+    html+=`<div class="grid">${products[c.key].map(cardHTML).join('')}</div>`;
+  });
+  document.getElementById('menu-zone').innerHTML=html;
+}
+renderMenu();
+
+// tab click -> scroll
+document.querySelectorAll('#cattabs button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#cattabs button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const el=document.getElementById('cat-'+b.dataset.cat);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// chip toggle
+document.querySelectorAll('.chip').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+  });
+});
+
+// add buttons (delegated)
+document.body.addEventListener('click',e=>{
+  const btn=e.target.closest('.add');
+  if(btn){e.stopPropagation();addToCart(parseFloat(btn.dataset.p));}
+});
+</script>
+</body>
+</html>
